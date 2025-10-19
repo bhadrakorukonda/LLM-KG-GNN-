@@ -1,0 +1,5 @@
+A	collaborates_with	B
+B	coauthored_with	C
+C	advises	D
+D	influences	E
+A	mentions	D

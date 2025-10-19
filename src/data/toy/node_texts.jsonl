@@ -1,0 +1,5 @@
+{"id": "A", "text": "Alice is a researcher who collaborates with Bob on GraphRAG."}
+{"id": "B", "text": "Bob co-authored a paper with Carol about Knowledge Graphs."}
+{"id": "C", "text": "Carol maintains a dataset about citation networks."}
+{"id": "D", "text": "Dave focuses on edge-aware attention and EGAT."}
+{"id": "E", "text": "Eve curates Q&A benchmarks for graph-grounded QA."}

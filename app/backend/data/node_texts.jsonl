@@ -1,0 +1,5 @@
+{"id":"Alice","text":"Alice is a researcher in ML."}
+{"id":"Bob","text":"Bob collaborates with Alice and Carol; co-authored with Carol."}
+{"id":"Carol","text":"Carol is a PhD student; co-authored with Bob."}
+{"id":"Dan","text":"Dan advised Carol."}
+{"id":"Eve","text":"Eve co-authored with Bob."}
