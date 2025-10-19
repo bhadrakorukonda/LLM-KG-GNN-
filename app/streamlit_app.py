@@ -1,4 +1,6 @@
-﻿import json, requests, streamlit as st
+﻿import os
+API_URL = os.getenv("API_URL","http://localhost:8001")
+import json, requests, streamlit as st
 
 st.set_page_config(page_title="Graph LLM–KG v1", layout="wide")
 st.title("Graph LLM–KG v1")
@@ -51,3 +53,4 @@ if st.button("Ask"):
             st.json(ctx)
     except Exception as e:
         st.error(f"Request failed: {e}")
+

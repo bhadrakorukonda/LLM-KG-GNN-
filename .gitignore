@@ -1,112 +1,44 @@
-﻿# # -------------------------
-# Python
-# -------------------------
+﻿# Python
 __pycache__/
 *.py[cod]
-*.pyo
 *.pyd
-*.so
+*.pyo
 *.egg-info/
 .eggs/
-.mypy_cache/
-.pytype/
-.pytest_cache/
-.coverage
-.coverage.*
-htmlcov/
-.tox/
-.cache/
-
-# -------------------------
-# Virtual environments
-# -------------------------
+build/
+dist/
 .venv*/
-venv*/
-env*/
-ENV/
-pip-wheel-metadata/
-
-# -------------------------
-# FastAPI / Uvicorn / Logs
-# -------------------------
+.venv/
+.env
+.env.*.local
 *.log
-*.pid
+*.sqlite3
 
-# -------------------------
-# Streamlit
-# -------------------------
+# Tools & caches
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.cache/
 .streamlit/
-.streamlit-secrets.toml
 
-# -------------------------
-# Node / Frontend (if any)
-# -------------------------
+# Editors/OS
+.vscode/
+.idea/
+*.suo
+*.user
+*.sln
+Thumbs.db
+Desktop.ini
+
+# Node (if any)
 node_modules/
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+yarn.lock
 pnpm-lock.yaml
-dist/
-build/
 
-# -------------------------
-# OS / Editor junk
-# -------------------------
-.DS_Store
-Thumbs.db
-desktop.ini
-Icon?
-*.swp
-*.swo
-*.orig
-.idea/
-.vscode/
-*.code-workspace
-
-# -------------------------
-# Environment & Secrets
-# -------------------------
-.env
-*.env
-.env.*
-*.key
-*.pem
-
-# -------------------------
-# Data & Artifacts
-# (Keep only tiny demo files explicitly un-ignored)
-# -------------------------
-app/backend/data/**
-!app/backend/data/edges.tsv
-!app/backend/data/node_texts.jsonl
-!app/backend/data/aliases.json
-
-# Optional: ignore temporary/cache/lock files even if whitelisted above
-app/backend/data/*.tmp
-app/backend/data/*.cache
-app/backend/data/*.lock
-
-# -------------------------
-# Model / Checkpoints / Weights
-# -------------------------
-*.bin
-*.pt
-*.ckpt
-*.safetensors
-*.onnx
-*.gguf
-
-# -------------------------
-# Notebooks (outputs)
-# -------------------------
-.ipynb_checkpoints/
-
-# -------------------------
-# Distribution / Packaging
-# -------------------------
-build/
-dist/
-MANIFEST
-*.manifest
-*.spec
-
+# Data & artifacts
+/data/*
+!/data/.gitkeep
+/models/*
+!/models/.gitkeep
+/checkpoints/
