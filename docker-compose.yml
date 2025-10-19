@@ -1,33 +1,9 @@
-version: '3.8'
+﻿version: "3.9"
 services:
   api:
     build: .
-    command: uvicorn backend.api:app --host 0.0.0.0 --port 8001
+    image: llm-gnn-kg:0.1.0
     ports:
-      - "8001:8001"
+      - "8010:8001"
     environment:
-      - GRAPH_EDGES_PATH=/app/data/edges.tsv
-      - GRAPH_NODE_TEXTS_PATH=/app/data/node_texts.jsonl
-      - API_URL=http://localhost:8001
-    volumes:
-      - .:/app
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-  ui:
-    build: .
-    command: streamlit run app/streamlit_app.py --server.port 8501 --server.address 0.0.0.0
-    ports:
-      - "8501:8501"
-    environment:
-      - API_URL=http://api:8001
-    volumes:
-      - .:/app
-    depends_on:
-      api:
-        condition: service_healthy
-
-
+      OLLAMA_HOST: "http://host.docker.internal:11434"

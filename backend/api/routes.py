@@ -1,10 +1,7 @@
 ﻿from fastapi import APIRouter, Request
 from pydantic import BaseModel
-import os
-import httpx
-
+import os, httpx
 from backend import graph_store
-from backend import main as backend_main  # for generate_answer monkeypatch in tests
 
 router = APIRouter()
 
@@ -18,46 +15,40 @@ class AskPayload(BaseModel):
 
 @router.post("/ask")
 async def ask(request: Request, payload: AskPayload):
+    from backend.graph_store import build_ctx
     dry_run = request.query_params.get("dry_run", "false").lower() == "true"
-    ctx = graph_store.build_ctx(
-        topk_paths=payload.topk_paths,
-        max_hops=payload.max_hops,
-        neighbor_expand=payload.neighbor_expand,
-    )
+    ctx = build_ctx(payload.topk_paths, payload.max_hops, payload.neighbor_expand)
     if dry_run:
-        # Dry-run must NOT include "answer"
         return {"ctx": ctx}
+    from backend.main import generate_answer as _gen
+    return {"answer": _gen(payload.question, ctx, payload.model, 30), "ctx": ctx}
 
-    # call generate_answer via backend_main so tests can monkeypatch it
-    answer = backend_main.generate_answer(
-        question=payload.question,
-        ctx=ctx,
-        model=payload.model,
-        timeout_s=30,
-    )
-    return {"answer": answer, "ctx": ctx}
+def _fetch_models(host: str) -> list[str]:
+    url = f"{host.rstrip('/')}/api/tags"
+    with httpx.Client() as c:
+        r = c.get(url)
+    if r.status_code == 200:
+        data = r.json()
+        return [m.get("name") for m in data.get("models", []) if isinstance(m, dict) and m.get("name")]
+    return []
 
 @router.get("/models")
 def models():
-    host = os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/")
-    url = f"{host}/api/tags"
-    try:
-        with httpx.Client() as c:
-            resp = c.get(url)  # tests stub this
-        if resp.status_code == 200:
-            data = resp.json()
-            # Normalize to a plain list of model names, e.g., ["llama3"]
-            names = [m.get("name") for m in data.get("models", []) if isinstance(m, dict) and m.get("name")]
-            return names
-    except Exception:
-        pass
+    hosts = []
+    env = os.environ.get("OLLAMA_HOST")
+    if env:
+        hosts.append(env)
+    # dev-friendly fallback for Docker Desktop on Windows/macOS
+    hosts.append("http://host.docker.internal:11434")
+    seen = set()
+    for h in hosts:
+        if h in seen: 
+            continue
+        seen.add(h)
+        try:
+            names = _fetch_models(h)
+            if names:
+                return names
+        except Exception:
+            pass
     return []
-    
-class ReloadPayload(BaseModel):
-    edges: str
-    texts: str
-
-@router.post("/reload")
-def reload(payload: ReloadPayload):
-    stats = graph_store.reload(payload.edges, payload.texts)
-    return {"status": "ok", "edges": payload.edges, "texts": payload.texts, **stats}
