@@ -1,0 +1,104 @@
+﻿id	type	name
+e_apple	Company	Apple
+e_nvidia	Company	NVIDIA
+e_tsmc	Company	TSMC
+e_asml	Company	ASML
+e_microsoft	Company	Microsoft
+e_openai	Company	OpenAI
+e_tesla	Company	Tesla
+e_foxconn	Company	Foxconn
+e_goldman	Company	Goldman Sachs
+e_amd	Company	AMD
+e_intel	Company	Intel
+e_arm	Company	ARM
+e_broadcom	Company	Broadcom
+e_qualcomm	Company	Qualcomm
+e_samsung	Company	Samsung Electronics
+e_skhynix	Company	SK Hynix
+e_ibm	Company	IBM
+e_alphabet	Company	Alphabet
+e_google	Product	Google Search
+e_amazon	Company	Amazon
+e_meta	Company	Meta
+e_oracle	Company	Oracle
+e_sap	Company	SAP
+e_salesforce	Company	Salesforce
+e_uber	Company	Uber
+e_lyft	Company	Lyft
+e_byd	Company	BYD
+e_toyota	Company	Toyota
+e_berkshire	Company	Berkshire Hathaway
+e_jpmorgan	Company	JPMorgan Chase
+e_morganstanley	Company	Morgan Stanley
+e_citigroup	Company	Citigroup
+e_bofa	Company	Bank of America
+e_blackrock	Company	BlackRock
+e_blackstone	Company	Blackstone
+e_softbank	Company	SoftBank
+e_tencent	Company	Tencent
+e_alibaba	Company	Alibaba
+e_bytedance	Company	ByteDance
+e_baidu	Company	Baidu
+e_huawei	Company	Huawei
+e_apple_pay	Product	Apple Pay
+e_iphone	Product	iPhone
+e_macos	Product	macOS
+e_gpu	Product	GPU
+e_cpu	Product	CPU
+e_datacenter	Product	Data Center
+e_azure	Product	Azure
+e_aws	Product	AWS
+e_github	Company	GitHub
+e_linkedin	Company	LinkedIn
+e_beats	Company	Beats
+e_mellanox	Company	Mellanox
+e_instagram	Product	Instagram
+e_whatsapp	Product	WhatsApp
+e_oculus	Product	Oculus
+e_chatgpt	Product	ChatGPT
+e_copilot	Product	Microsoft Copilot
+e_tiktok	Product	TikTok
+e_wechat	Product	WeChat
+e_alipay	Product	Alipay
+e_cloud	Market	Cloud
+e_ai	Market	AI
+e_automotive	Market	Automotive
+e_semiconductors	Market	Semiconductors
+e_consumer	Market	Consumer Electronics
+e_finance	Market	Finance
+e_mobile	Market	Mobile
+e_cupertino	Location	Cupertino
+e_santaclara	Location	Santa Clara
+e_hsinchu	Location	Hsinchu
+e_veldhoven	Location	Veldhoven
+e_redmond	Location	Redmond
+e_sanfrancisco	Location	San Francisco
+e_austin	Location	Austin
+e_taipei	Location	Taipei
+e_seoul	Location	Seoul
+e_tokyo	Location	Tokyo
+e_newyork	Location	New York
+e_london	Location	London
+e_shanghai	Location	Shanghai
+e_menlopark	Location	Menlo Park
+e_beijing	Location	Beijing
+e_mumbai	Location	Mumbai
+e_paris	Location	Paris
+e_timcook	Person	Tim Cook
+e_jensen	Person	Jensen Huang
+e_satya	Person	Satya Nadella
+e_elon	Person	Elon Musk
+e_sundar	Person	Sundar Pichai
+e_markz	Person	Mark Zuckerberg
+e_lisasu	Person	Lisa Su
+e_patg	Person	Pat Gelsinger
+e_samaltman	Person	Sam Altman
+e_billgates	Person	Bill Gates
+e_jeffbezos	Person	Jeff Bezos
+e_andyjassy	Person	Andy Jassy
+e_masayoshi	Person	Masayoshi Son
+e_larrypage	Person	Larry Page
+e_sergeybrin	Person	Sergey Brin
+e_warren	Person	Warren Buffett
+e_chrismalachowsky	Person	Chris Malachowsky
+e_curtispriem	Person	Curtis Priem

@@ -1,0 +1,20 @@
+﻿{"name":"NVIDIA","entity_id":"e_nvidia","aliases":["NVDA","Nvidia Corporation","NVIDIA Corp."]}
+{"name":"TSMC","entity_id":"e_tsmc","aliases":["Taiwan Semiconductor","TSMC Ltd.","Taiwan Semiconductor Manufacturing Company"]}
+{"name":"Microsoft","entity_id":"e_microsoft","aliases":["MSFT","Microsoft Corp.","Microsoft Corporation"]}
+{"name":"Apple","entity_id":"e_apple","aliases":["AAPL","Apple Inc."]}
+{"name":"Alphabet","entity_id":"e_alphabet","aliases":["GOOG","Google","Google LLC"]}
+{"name":"Amazon","entity_id":"e_amazon","aliases":["AMZN","Amazon.com"]}
+{"name":"Meta","entity_id":"e_meta","aliases":["META","Facebook","Facebook Inc."]}
+{"name":"ARM","entity_id":"e_arm","aliases":["ARM Holdings","Arm Ltd."]}
+{"name":"ASML","entity_id":"e_asml","aliases":["ASML Holding","ASML NV"]}
+{"name":"Foxconn","entity_id":"e_foxconn","aliases":["Hon Hai","Hon Hai Precision","Hon Hai Precision Industry"]}
+{"name":"Goldman Sachs","entity_id":"e_goldman","aliases":["GS","Goldman"]}
+{"name":"JPMorgan Chase","entity_id":"e_jpmorgan","aliases":["JPM","JP Morgan","JPMorgan"]}
+{"name":"SK Hynix","entity_id":"e_skhynix","aliases":["Hynix","SK hynix Inc."]}
+{"name":"Qualcomm","entity_id":"e_qualcomm","aliases":["QCOM","Qualcomm Inc."]}
+{"name":"Broadcom","entity_id":"e_broadcom","aliases":["AVGO","Broadcom Inc."]}
+{"name":"Intel","entity_id":"e_intel","aliases":["INTC","Intel Corp."]}
+{"name":"AMD","entity_id":"e_amd","aliases":["Advanced Micro Devices","AMD Inc."]}
+{"name":"OpenAI","entity_id":"e_openai","aliases":["Open AI"]}
+{"name":"Azure","entity_id":"e_azure","aliases":["Microsoft Azure","Azure Cloud"]}
+{"name":"AWS","entity_id":"e_aws","aliases":["Amazon Web Services","AWS Cloud"]}
