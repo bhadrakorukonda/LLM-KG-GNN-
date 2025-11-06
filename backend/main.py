@@ -1,18 +1,27 @@
-﻿from fastapi import FastAPI
-from backend.api import router
+﻿# backend/main.py
+from __future__ import annotations
 
-app = FastAPI(title="Graph RAG Sprint API", version="0.1.0")
-app.include_router(router, prefix="")
+"""
+Compatibility module for tests.
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+- tests import backend.main.app (we proxy the FastAPI app from backend.api)
+- tests monkeypatch backend.main.generate_answer (so expose a function here)
+"""
 
-@app.get("/version")
-def version():
-    return {"name": "Graph RAG Sprint API", "version": "0.1.0"}
+from backend.api import app  # re-export the running FastAPI app
 
-# This is intentionally simple so tests can monkeypatch it
-def generate_answer(question: str, ctx: dict, model: str = "ollama/llama3", timeout_s: int = 30) -> str:
-    # default implementation, replaced in tests
+
+def generate_answer(
+    question: str,
+    ctx: dict,
+    model: str = "ollama/llama3",
+    timeout_s: int = 30,
+) -> str:
+    """
+    Default implementation; tests will monkeypatch this.
+    Keep it simple and deterministic.
+    """
     return "DEFAULT_ANSWER"
+
+
+__all__ = ["app", "generate_answer"]

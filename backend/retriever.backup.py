@@ -1,11 +1,11 @@
-﻿from __future__ import annotations
+# backend/retriever.py
+from __future__ import annotations
 
 import json
 import pathlib
 from typing import Dict, List, Tuple
 import networkx as nx
 
-# Data dir and globals
 DATA = pathlib.Path(__file__).parents[1] / "data"
 G: nx.MultiDiGraph = nx.MultiDiGraph()
 NODE_TEXT: Dict[str, str] = {}
@@ -14,13 +14,11 @@ def _read_edges_tsv(path: pathlib.Path) -> List[Tuple[str, str, str]]:
     triples: List[Tuple[str, str, str]] = []
     if not path.exists():
         return triples
-    # Accept both TAB and whitespace-separated 3-column lines
     with path.open("r", encoding="utf-8-sig") as f:
         for raw in f:
             line = raw.strip()
             if not line:
                 continue
-            # Prefer tab split, fallback to any whitespace
             parts = line.split("\t") if "\t" in line else line.split()
             if len(parts) >= 3:
                 h, r, t = parts[:3]
@@ -47,7 +45,10 @@ def _read_node_texts_jsonl(path: pathlib.Path) -> Dict[str, str]:
     return out
 
 def load_graph(edges_path: str | None = None, node_texts_path: str | None = None) -> None:
-    """Load TSV edges + JSONL node blurbs; build MultiDiGraph + text map."""
+    """
+    Load TSV edges + JSONL node blurbs; build MultiDiGraph + NODE_TEXT.
+    Defaults to data/kg_edges.tsv and data/node_texts.jsonl.
+    """
     edges_file = pathlib.Path(edges_path) if edges_path else (DATA / "kg_edges.tsv")
     texts_file = pathlib.Path(node_texts_path) if node_texts_path else (DATA / "node_texts.jsonl")
 
@@ -60,51 +61,40 @@ def load_graph(edges_path: str | None = None, node_texts_path: str | None = None
         G.add_node(t)
         G.add_edge(h, t, label=r)
 
-    # Texts (robust keys)
+    # Texts
     NODE_TEXT.update(_read_node_texts_jsonl(texts_file))
 
 def retrieve(question: str, topk_paths: int, max_hops: int, neighbor_expand: int):
-    """Very small heuristic retriever good enough for the demo/UI."""
-    ql = (question or "").lower()
+    """
+    Minimal, predictable retriever good enough for the demo/UI.
+    Seeds by node-name match; returns Carol→Bob path when present.
+    """
+    q = (question or "").lower()
     seeds: List[str] = []
-
-    # Seed by name match against node ids and text map keys
-    node_names = {str(n) for n in G.nodes} | set(NODE_TEXT.keys())
-    for name in node_names:
-        if name and name.lower() in ql:
+    names = {str(n) for n in G.nodes} | set(NODE_TEXT.keys())
+    for name in names:
+        if name and name.lower() in q:
             seeds.append(name)
 
-    # If nothing matched, seed from obvious names in the toy graph
-    for name in ["Carol", "Bob", "Eve", "Alice", "Dan"]:
-        if (name.lower() in ql) and (name not in seeds):
-            seeds.append(name)
+    # obvious toy names if mentioned
+    for n in ["Carol", "Bob", "Eve", "Alice", "Dan"]:
+        if (n.lower() in q) and n not in seeds:
+            seeds.append(n)
 
-    # Try to produce a simple path if Carol/Bob appear or can be inferred
+    # simple path for the toy demo
     paths: List[List[str]] = []
-    def _has_edge(u: str, v: str) -> bool:
-        return G.has_edge(u, v) or G.has_edge(v, u)
-
-    if (("carol" in ql) and ("bob" in ql)) or _has_edge("Carol", "Bob"):
-        # Try a shortest path if it exists
+    if ("carol" in q and "bob" in q) or (G.has_edge("Carol","Bob") or G.has_edge("Bob","Carol")):
         try:
             p = nx.shortest_path(G.to_undirected(), "Carol", "Bob", cutoff=max_hops if max_hops else None)
             if p:
                 paths.append([str(x) for x in p])
         except Exception:
-            # fallback to a direct two-hop (demo-friendly)
             paths.append(["Carol", "Bob"])
 
-    # Assemble node notes from NODE_TEXT for seeds
     notes: List[str] = []
     for s in seeds:
         t = NODE_TEXT.get(s) or NODE_TEXT.get(str(s)) or ""
         if t:
             notes.append(f"{s}: {t}")
 
-    return {
-        "seeds": seeds,
-        "paths": paths,
-        "contexts": [],
-        "local_facts": [],
-        "node_notes": notes,
-    }
+    return {"seeds": seeds, "paths": paths, "contexts": [], "local_facts": [], "node_notes": notes}
