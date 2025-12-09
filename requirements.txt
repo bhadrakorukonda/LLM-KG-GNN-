@@ -10,3 +10,15 @@ tqdm==4.66.5
 httpx==0.27.2
 streamlit==1.38.0
 pandas==2.2.3
+
+# Neo4j integration
+neo4j==5.14.0
+
+# PyTorch Geometric for GNN-based retrieval
+torch==2.1.0
+torch-geometric==2.4.0
+
+# Additional dependencies for embeddings and visualization
+sentence-transformers==2.2.2
+scikit-learn==1.3.2
+plotly==5.18.0

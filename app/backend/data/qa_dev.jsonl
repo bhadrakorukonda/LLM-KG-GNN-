@@ -1,3 +1,0 @@
-{"q":"How does Graph RAG improve QA?","answers":["by retrieving graph paths before generation","improves retrieval","uses knowledge graph context"]}
-{"q":"Who co-authored a paper with Bob?","answers":["Carol","Bob co-authored with Carol","Carol co-authored with Bob"]}
-{"q":"Name one collaborator of Bob.","answers":["Alice","Bob collaborates with Alice"]}
